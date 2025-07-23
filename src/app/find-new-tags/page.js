@@ -120,8 +120,12 @@ export default function Home() {
 	}
 
   return (
-    <div className="w-4xl mx-auto px-4">
-      <Link href="/" className="text-blue-600 font-bold hover:text-blue-500">‹ Back</Link>
+    <div className="w-4xl mx-auto px-4 mt-2">
+		<div className="flex flex-row justify-between items-center">
+			<Link href="/" className="text-blue-600 font-bold hover:text-blue-500">‹ Back</Link>
+
+			<a href="https://developer.niceincontact.com/API/AdminAPI#/General/ReturnsTags" target="_blank" className="text-blue-600 font-bold hover:text-blue-500 hover:underline">Get Tags</a>
+		</div>
 
       <div className="py-4">
         <h1 className="text-4xl font-bold border-b-1 border-b-gray-200 mb-4">Find New Tags</h1>

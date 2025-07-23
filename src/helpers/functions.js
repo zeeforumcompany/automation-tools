@@ -21,6 +21,14 @@ const handleChange = (e, setValue) => {
 	}));
 };
 
+const handleCheckbox = (e, setValue) => {
+	const { name } = e.target;
+	setValue(prevValues => ({
+		...prevValues,
+		[name]: !prevValues[name],
+	}));
+};
+
 const isDefined = (value) => {
 	return value !== undefined && value !== null && value !== '';
 }
@@ -274,6 +282,7 @@ export {
 	delay,
 	copyToClipboard,
 	handleChange,
+	handleCheckbox,
 	isDefined,
 	convertCurlToApiRequest,
 	removeStringAndSingleQuote,
