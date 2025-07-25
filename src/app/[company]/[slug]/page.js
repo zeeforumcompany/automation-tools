@@ -10,7 +10,7 @@ export async function generateStaticParams() {
   // Map your data to the expected format for generateStaticParams
   const params = data.map((item) => ({
     company: item.company,
-    slug: item.slug,
+    slug: item.slug
   }));
 
   return params;
@@ -18,24 +18,21 @@ export async function generateStaticParams() {
 
 export default async function NiceApp({ params }) {
 	let { company, slug } = await params;
-	// let slug = usePathname();
-	// slug = slug ? slug.split('/').filter(Boolean) : [];
-	// slug = slug.length > 0 ? slug[slug.length - 1] : null;
+
+	let data = fetchCompanyAndSlugData();
+	let components = data.filter((item) => {
+		if (item.company === company && item.slug === slug) {
+			return item.component;
+		}
+	});
 
 	let content;
 
 	if (!slug) {
 		content = <p>Loading...</p>;
-	} else if (slug === 'postman') {
-		content = <Postman />;
-	} else if (slug === 'find-new-tags') {
-		content = <FindNewTags />;
-	} else if (slug === 'dispositions') {
-		content = <Dispositions />;
-	} else if (slug === 'hours-of-operation') {
-		content = <HoursOfOperation />;
-
-	} else {
+	} else if (slug !== '' && components.length > 0) {
+		content = components[0].component || <p>Component not found</p>;
+	}else {
 		content = <p>404 - Page Not Found</p>;
 	}
 
