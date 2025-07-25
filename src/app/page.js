@@ -9,9 +9,10 @@ export default function Home() {
       <h1 className="text-4xl font-bold">Automation Tools</h1>
       <ul className="mt-4 space-y-2">
         <li className="">
-          <Link href="/postman" className={className}>Postman</Link>
-          <Link href="/find-new-tags" className={className}>Compare New Tags with API Tags</Link>
-          <Link href="/dispositions" className={className}>Dispositions (To JSON)</Link>
+          <Link href="/nice/postman" className={className}>Postman</Link>
+          <Link href="/nice/find-new-tags" className={className}>Compare New Tags with API Tags</Link>
+          <Link href="/nice/dispositions" className={className}>Dispositions (To JSON)</Link>
+          <Link href="/nice/hours-of-operation" className={className}>Hours of Operation (To JSON)</Link>
         </li>
       </ul>
     </div>

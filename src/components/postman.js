@@ -5,7 +5,7 @@ import Link from "next/link";
 import { convertCurlToApiRequest, handleChange, sendRequestForObjects } from "@/helpers/functions";
 import { useRef, useState } from "react";
 
-export default function Home() {
+export default function Postman() {
   const [disabled, setDisabled] = useState(false);
   const [form, setForm] = useState({
     curl: `curl --location --request POST 'https://jsonplaceholder.typicode.com/posts?name={{name}}&query={{query}}' \

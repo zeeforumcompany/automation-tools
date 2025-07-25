@@ -4,7 +4,7 @@ import Link from "next/link";
 import { handleChange, copyToClipboard } from "@/helpers/functions";
 import { useState } from "react";
 
-export default function Home() {
+export default function FindNewTags() {
 	const [disabled, setDisabled] = useState(false);
 	const [form, setForm] = useState({
 		tags: `[
