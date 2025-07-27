@@ -120,7 +120,7 @@ export default function FindNewTags() {
 	}
 
   return (
-    <div className="w-4xl mx-auto px-4 mt-2">
+    <>
 		<div className="flex flex-row justify-between items-center">
 			<Link href="/" className="text-blue-600 font-bold hover:text-blue-500">‹ Back</Link>
 
@@ -149,6 +149,6 @@ export default function FindNewTags() {
           <textarea name="newTags" rows="9" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.newTags}></textarea>
         </div>
       </div>
-    </div>
+    </>
   );
 }

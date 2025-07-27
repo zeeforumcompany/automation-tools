@@ -38,7 +38,7 @@ export default function Postman() {
   };
 
   return (
-    <div className="w-4xl mx-auto px-4 mt-2">
+    <>
       <Link href="/" className="text-blue-600 font-bold hover:text-blue-500">‹ Back</Link>
 
       <div className="py-4">
@@ -61,6 +61,6 @@ export default function Postman() {
         <div ref={htmlRef}>
         </div>
       </div>
-    </div>
+    </>
   );
 }

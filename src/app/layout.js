@@ -22,7 +22,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="w-4xl mx-auto px-4 mt-2">
+          {children}
+          
+          <hr className="my-4" />
+          
+          <div className="mt-4">
+            <p className="text-red-700"><span className="font-bold">* Note:</span> Use these tools at your own risk. We will not be responsible for any data loss or damage due to these tools. Thank you</p>
+          </div>
+        </div>
       </body>
     </html>
   );

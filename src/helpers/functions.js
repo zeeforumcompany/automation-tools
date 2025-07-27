@@ -285,6 +285,9 @@ export {
 	handleCheckbox,
 	isDefined,
 	convertCurlToApiRequest,
+	replaceDynamicData,
 	removeStringAndSingleQuote,
-	sendRequestForObjects
+	prependFailedAndSuccessRequestData,
+	sendRequest,
+	sendRequestForObjects,
 };

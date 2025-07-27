@@ -38,7 +38,7 @@ Tag3`,
 	}
 
   return (
-    <div className="w-4xl mx-auto px-4 mt-2">
+    <>
 		<div className="flex flex-row justify-between items-center">
 			<Link href="/" className="text-blue-600 font-bold hover:text-blue-500">‹ Back</Link>
 
@@ -67,6 +67,6 @@ Tag3`,
 			<b>Note:</b> This tool is used to convert text data into JSON format for Tags. The text data should be structured in a specific way, with each line representing a tag and its corresponding properties. After converting to JSON, you can continue to "Postman" to create tags using the generated JSON data.
 		</div>
       </div>
-    </div>
+    </>
   );
 }
