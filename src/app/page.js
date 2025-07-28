@@ -7,16 +7,29 @@ export default function Home() {
 
   const pages = fetchCompanyAndSlugData();
 
+  let label = "";
+
   return (
     <>
       <h1 className="text-4xl font-bold">Automation Tools</h1>
       <ul className="mt-4 space-y-2">
         <li className="">
-          {pages.map((page) => (
-            <Link key={page.slug} href={`/${page.company}/${page.slug}`} className={className}>
-              {page.text}
-            </Link>
-          ))}
+          {pages.map((page) => {
+            let heading = "";
+            if (page.label && page.label !== undefined && page.label !== label) {
+              heading = <h3 className="font-bold my-2 text-xl">{page.label}</h3>;
+              label = page.label;
+            }
+
+            return (
+              <>
+                {heading}
+                <Link key={page.slug} href={`/${page.company}/${page.slug}`} className={className}>
+                  {page.text}
+                </Link>
+              </>
+            );
+          })}
         </li>
       </ul>
     </>
