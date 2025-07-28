@@ -1,7 +1,3 @@
-import Postman from "@/components/postman";
-import FindNewTags from "@/components/find-new-tags";
-import Dispositions from "@/components/dispositions";
-import HoursOfOperation from "@/components/hours-of-operation";
 import fetchCompanyAndSlugData from "@/helpers/router";
 
 export async function generateStaticParams() {

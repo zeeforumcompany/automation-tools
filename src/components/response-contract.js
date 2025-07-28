@@ -92,7 +92,7 @@ export default function GenesysResponseContract() {
 		</div>
 
       <div className="py-4">
-        <h1 className="text-4xl font-bold border-b-1 border-b-gray-200 mb-4">Text to Tags (JSON)</h1>
+        <h1 className="text-4xl font-bold border-b-1 border-b-gray-200 mb-4">Genesys - API Contracts</h1>
 
         <div className="mb-2">
           <label htmlFor="apiResponse" className="font-bold">API Response</label>

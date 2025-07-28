@@ -21,13 +21,15 @@ export default function Home() {
               label = page.label;
             }
 
+            let url = `/${page.company}/${page.slug}`;
+
             return (
-              <>
+              <div key={url}>
                 {heading}
-                <Link key={page.slug} href={`/${page.company}/${page.slug}`} className={className}>
+                <Link href={url} className={className}>
                   {page.text}
                 </Link>
-              </>
+              </div>
             );
           })}
         </li>
