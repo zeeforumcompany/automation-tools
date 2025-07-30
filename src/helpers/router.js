@@ -10,6 +10,7 @@ import TextToTags from "@/components/text-to-tags";
 export default function fetchCompanyAndSlugData() {
   return [
     { company: 'custom', slug: 'postman', text: "Postman", component: <Postman /> },
+    { company: '', slug: 'flow', text: "Visualize Flow" },
     { company: 'nice', slug: 'find-new-tags', text: "Compare New Tags with API Tags", component: <FindNewTags />, label: "NICE CXone" },
     { company: 'nice', slug: 'dispositions', text: "Dispositions (To JSON)", component: <Dispositions />, label: "NICE CXone" },
     { company: 'nice', slug: 'hours-of-operation', text: "Hours of Operation (To JSON)", component: <HoursOfOperation />, label: "NICE CXone" },

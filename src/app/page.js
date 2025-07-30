@@ -21,7 +21,11 @@ export default function Home() {
               label = page.label;
             }
 
-            let url = `/${page.company}/${page.slug}`;
+            let url = `/${page.slug}`;
+
+            if (page.company && page.company !== '') {
+              url = `/${page.company}/${page.slug}`;
+            }
 
             return (
               <div key={url}>
