@@ -167,6 +167,42 @@ const toggleResponseSection = (existingResponseSection, request, response, statu
 	existingResponseSection.innerHTML += contentToAppend;
 }
 
+const printFailedAndSuccessResponseData = (htmlRef, requestData, type = "success") => {
+	let classes = "border-red-400 text-red-400";
+	let textSuccess = "text-danger";
+	if (type === "success") {
+		classes = "border-blue-500 text-green-600";
+		textSuccess = "text-green-600";
+	}
+
+	var contentToAppend = `<details class="request-details border-1 ${classes} px-4 py-3 mb-2">
+		<summary class="${textSuccess} flex flex-row justify-between">
+			${requestData.title}
+		</summary>
+		<p class="response text-black my-2">${JSON.stringify(requestData.body)}</p>
+	</details>`;
+
+	htmlRef.current.innerHTML += contentToAppend;
+};
+
+const printFailedAndSuccessResponseCount = (htmlRef, failedCount, successCount) => {
+	var contentToAppend = `
+		<details class="request-details border-1 border-blue-400 text-red-400 px-4 py-3 mb-2">
+			<summary class="text-danger">
+				Failed Requests: ${failedCount}
+			</summary>
+		</details>
+		<details class="request-details border-1 border-blue-400 text-green-600 px-4 py-3 mb-2">
+			<summary class="text-success">
+				Success Requests: ${successCount}
+			</summary>
+		</details>
+	`;
+
+	// Check if the response section is already appended to the body
+	htmlRef.current.innerHTML = contentToAppend + htmlRef.current.innerHTML;
+};
+
 // Prepend Failed & Success Request Data
 const prependFailedAndSuccessRequestData = (existingResponseSection, failedRequestData, successRequestData) => {
 	var contentToAppend = `
@@ -176,7 +212,7 @@ const prependFailedAndSuccessRequestData = (existingResponseSection, failedReque
 			</summary>
 			<p class="response text-black my-2">${JSON.stringify(failedRequestData)}</p>
 		</details>
-		<details class="request-details border-1 border-blue-400 text-green-500 px-4 py-3 mb-2">
+		<details class="request-details border-1 border-blue-400 text-green-600 px-4 py-3 mb-2">
 			<summary class="text-success">
 				Success Requests: ${successRequestData.length}
 			</summary>
@@ -290,4 +326,6 @@ export {
 	prependFailedAndSuccessRequestData,
 	sendRequest,
 	sendRequestForObjects,
+	printFailedAndSuccessResponseData,
+	printFailedAndSuccessResponseCount,
 };

@@ -1,3 +1,4 @@
+import AmazonConnectContact from "@/components/amazon-connect-contact";
 import Dispositions from "@/components/dispositions";
 import FindNewTags from "@/components/find-new-tags";
 import HoursOfOperation from "@/components/hours-of-operation";
@@ -18,5 +19,6 @@ export default function fetchCompanyAndSlugData() {
     { company: 'nice', slug: 'skills-disposition-update-v28', text: "Skills Disposition Update By Skill ID (v28)", component: <SkillsDispositionUpdate />, label: "NICE CXone" },
     { company: 'nice', slug: 'skills-disposition-update-v32', text: "Skills Disposition Update By Skill ID (v32)", component: <SkillsDispositionUpdateV32 />, label: "NICE CXone" },
     { company: 'genesys', slug: 'genesys-contracts', text: "Genesys Response Contracts - Custom Actions", component: <GenesysResponseContract />, label: "Genesys Cloud" },
+    { company: 'amazon-connect', slug: 'contact', text: "Amazon Connect - Search Contact & Update Attributes", component: <AmazonConnectContact />, label: "Amazon Connect" },
   ];
 }
