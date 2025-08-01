@@ -17,53 +17,57 @@ export default function App() {
 	console.log(form);
 
 	const setupFlow = () => {
-		const nodes = [];
+		try {
+			const nodes = [];
 
-		const flowJson = JSON.parse(form.flow);
-		const actions = flowJson.actions;
-		const branches = flowJson.branches;
+			const flowJson = JSON.parse(form.flow);
+			const actions = flowJson.actions;
+			const branches = flowJson.branches;
 
-		Object.keys(actions).forEach((key) => {
-			const action = actions[key];
+			Object.keys(actions).forEach((key) => {
+				const action = actions[key];
 
-			let x = action.x || 0;
-			let y = action.y || 0;
+				let x = action.x || 0;
+				let y = action.y || 0;
 
-			nodes.push({
-				id: `n${action.actionId}`,
-				position: { x, y },
-				data: { label: action.label || action.name },
-				type: 'default',
-				dependencyOrder: action.dependencyOrder,
-				sourcePosition: 'right',
-				targetPosition: 'left',
-			});
-		});
-
-		nodes.sort((a, b) => {
-			return a.dependencyOrder - b.dependencyOrder;
-		});
-		console.log(nodes);
-
-		const edges = [];
-		Object.keys(branches).forEach((key) => {
-			const branch = branches[key];
-			branch.forEach((edge) => {
-				edges.push({
-					id: `e${edge.to}-${key}`,
-					source: `n${key}`,
-					target: `n${edge.to}`,
+				nodes.push({
+					id: `n${action.actionId}`,
+					position: { x, y },
+					data: { label: action.label || action.name },
 					type: 'default',
-					label: edge.label || '',
-					markerEnd: {
-						type: MarkerType.ArrowClosed,
-					},
+					dependencyOrder: action.dependencyOrder,
+					sourcePosition: 'right',
+					targetPosition: 'left',
 				});
 			});
-		});
 
-		setInitialNodes(nodes);
-		setInitialEdges(edges);
+			nodes.sort((a, b) => {
+				return a.dependencyOrder - b.dependencyOrder;
+			});
+			console.log(nodes);
+
+			const edges = [];
+			Object.keys(branches).forEach((key) => {
+				const branch = branches[key];
+				branch.forEach((edge) => {
+					edges.push({
+						id: `e${edge.to}-${key}`,
+						source: `n${key}`,
+						target: `n${edge.to}`,
+						type: 'default',
+						label: edge.label || '',
+						markerEnd: {
+							type: MarkerType.ArrowClosed,
+						},
+					});
+				});
+			});
+
+			setInitialNodes(nodes);
+			setInitialEdges(edges);
+		} catch (error) {
+			console.error("Error setting up flow:", error);
+		}
 	}
 
   return (
@@ -80,7 +84,7 @@ export default function App() {
 				<label htmlFor="flow">Flow JSON</label>
 				<textarea id="flow" value={form.flow} onChange={(e) => handleChange(e, setForm)} name="flow" className="border border-gray-300 p-2" rows={10} />
 			</div>
-			<button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={setupFlow}>Setup Flow</button>
+			<button className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer" onClick={setupFlow}>Setup Flow</button>
 
 			<div className='h-lvh w-full p-4'>
 				<ReactFlow nodes={initialNodes} edges={initialEdges} attributionPosition="top-right" className='bg-gray-100'>
