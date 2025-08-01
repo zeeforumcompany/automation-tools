@@ -268,7 +268,9 @@ export default function AmazonConnectContact() {
         <h1 className="text-4xl font-bold border-b-1 border-b-gray-200 mb-4">Amazon Connect</h1>
 
 		<div className="mt-2">
-			<b>Note:</b> This tool is used to search contacts on amazon connect for specific dates and update their contacts attributes to empty/given values. If there are more records, it will automatically paginate through the results. You can also set the delay between each API request to avoid throttling issues.
+			<p><b>Note:</b> This tool is used to search contacts on amazon connect for specific dates and update their contacts attributes to empty/given values. If there are more records, it will automatically paginate through the results. You can also set the delay between each API request to avoid throttling issues.</p>
+
+			<p>When you press <b>"Update Attributes"</b>, it automatically save all your form data in your <b>browser local storage</b>. We don't send any data to our servers. This tool is solely for automation purpose.</p>
 		</div>
 		<hr className="my-4" />
 
@@ -368,7 +370,7 @@ export default function AmazonConnectContact() {
 		</div>
 
 		<div className="mb-2">
-			<button onClick={searchContacts} className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-sm hover:bg-blue-600 mt-2 disabled:bg-blue-400 disabled:cursor-not-allowed font-bold" disabled={disabled}>Search Contacts</button>
+			<button onClick={searchContacts} className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-sm hover:bg-blue-600 mt-2 disabled:bg-blue-400 disabled:cursor-not-allowed font-bold" disabled={disabled}>Update Attributes</button>
 			<DataHandler StorageKey={STORAGE_KEY} DefaultData={defaultForm} form={form} setForm={setForm} ref={childRef} />
 		</div>
 
