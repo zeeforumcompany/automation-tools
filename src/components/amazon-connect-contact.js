@@ -6,6 +6,8 @@ import moment from "moment";
 import { handleChange, isDefined, delay, printFailedAndSuccessResponseData, printFailedAndSuccessResponseCount } from "@/helpers/functions";
 import { useRef, useState } from "react";
 import DataHandler from "./shared/data-handler";
+import Input from "./shared/input";
+import SelectBox from "./shared/select-box";
 
 export default function AmazonConnectContact() {
 	const htmlRef = useRef(null);
@@ -68,6 +70,11 @@ export default function AmazonConnectContact() {
 		{"value": "us-gov-east-1", "label": "AWS GovCloud (US-East)"},
 		{"value": "us-gov-west-1", "label": "AWS GovCloud (US-West)"},
 	];
+
+	awsStates.map(state => {
+		state.label = state.label + " - " + state.value;
+		return state;
+	});
 
 	const timeRangeType = [
 		"INITIATION_TIMESTAMP",
@@ -275,36 +282,17 @@ export default function AmazonConnectContact() {
 		<hr className="my-4" />
 
 		<div className="grid grid-cols-2 gap-4 mb-2">
-			<div className="mb-2">
-				<label htmlFor="AccessKey">Access Key ID</label>
-				<input type="text" name="AccessKey" id="AccessKey" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.AccessKey} placeholder="Access Key ID" />
-			</div>
+			<Input name="AccessKey" value={form.AccessKey} onChange={(e) => handleChange(e, setForm)} placeholder="Access Key ID" />
 
-			<div className="mb-2">
-				<label htmlFor="SecretKey">Secret Access Key</label>
-				<input type="text" name="SecretKey" id="SecretKey" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.SecretKey} placeholder="Secret Access Key" />
-			</div>
+			<Input name="SecretKey" value={form.SecretKey} onChange={(e) => handleChange(e, setForm)} placeholder="Secret Access Key" />
 		</div>
 
-		<div className="mb-2">
-          <label htmlFor="SessionToken">Session Token</label>
-          <input type="text" name="SessionToken" id="SessionToken" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.SessionToken} placeholder="Session Token" />
-        </div>
+		<Input name="SessionToken" value={form.SessionToken} onChange={(e) => handleChange(e, setForm)} placeholder="Session Token" />
 
 		<div className="grid grid-cols-2 gap-4 mb-2">
-			<div className="mb-2">
-				<label htmlFor="AwsRegion">AWS Region</label>
-				<select name="AwsRegion" id="AwsRegion" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.AwsRegion}>
-					{awsStates.map(state => (
-						<option key={state.value} value={state.value}>{state.label} - {state.value}</option>
-					))}
-				</select>
-			</div>
+			<SelectBox name={"AwsRegion"} value={form.AwsRegion} onChange={(e) => handleChange(e, setForm)} options={awsStates} label={"AWS Region"} />
 
-			<div className="mb-2">
-				<label htmlFor="InstanceId">Amazon Connect - Instance ID</label>
-				<input type="text" name="InstanceId" id="InstanceId" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.InstanceId} placeholder="Instance ID" />
-			</div>
+			<Input name="InstanceId" value={form.InstanceId} onChange={(e) => handleChange(e, setForm)} placeholder="Amazon Connect - Instance ID" />
 		</div>
 
 		<div className="mb-2 border-b border-b-gray-300">
@@ -312,61 +300,25 @@ export default function AmazonConnectContact() {
 		</div>
 
 		<div className="grid grid-cols-3 gap-4 mb-2">
-			<div className="mb-2">
-				<label htmlFor="Channels">Channels</label>
-				<select name="Channels" id="Channels" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.Channels}>
-					{channels.map(channel => (
-						<option key={channel} value={channel}>{channel}</option>
-					))}
-				</select>
-			</div>
+			<SelectBox name={"Channels"} value={form.Channels} onChange={(e) => handleChange(e, setForm)} options={channels} label={"Channels"} />
 
-			<div className="mb-2">
-				<label htmlFor="SearchContactAttributeCriteriaMatchType">Search Contact Match Type</label>
-				<select name="SearchContactAttributeCriteriaMatchType" id="SearchContactAttributeCriteriaMatchType" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.SearchContactAttributeCriteriaMatchType}>
-					{matchTypes.map(type => (
-						<option key={type} value={type}>{type}</option>
-					))}
-				</select>
-			</div>
+			<SelectBox name={"SearchContactAttributeCriteriaMatchType"} value={form.SearchContactAttributeCriteriaMatchType} onChange={(e) => handleChange(e, setForm)} options={matchTypes} label={"Search Contact Match Type"} />
 
-			<div className="mb-2 ml-2">
-				<label htmlFor="delay">API Request (Delay - In Seconds)</label>
-				<input type="number" name="delay" id="delay" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.delay} placeholder="Delay" />
-			</div>
+			<Input type="number" name="delay" value={form.delay} onChange={(e) => handleChange(e, setForm)} placeholder="API Request (Delay - In Seconds)" />
 		</div>
 
 		<div className="grid grid-cols-3 gap-4 mb-2">
-			<div className="mb-2">
-				<label htmlFor="TimeRangeType">Time Range Type</label>
-				<select name="TimeRangeType" id="TimeRangeType" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.TimeRangeType}>
-					{timeRangeType.map(type => (
-						<option key={type} value={type}>{type}</option>
-					))}
-				</select>
-			</div>
+			<SelectBox name={"TimeRangeType"} value={form.TimeRangeType} onChange={(e) => handleChange(e, setForm)} options={timeRangeType} label={"Time Range Type"} />
 
-			<div className="mb-2">
-				<label htmlFor="StartTime">Start Time</label>
-				<input type="date" name="StartTime" id="StartTime" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.StartTime} placeholder="Start Time" />
-			</div>
+			<Input type="date" name="StartTime" value={form.StartTime} onChange={(e) => handleChange(e, setForm)} placeholder="Start Time" />
 
-			<div className="mb-2 ml-2">
-				<label htmlFor="EndTime">End Time</label>
-				<input type="date" name="EndTime" id="EndTime" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.EndTime} placeholder="End Time" />
-			</div>
+			<Input type="date" name="EndTime" value={form.EndTime} onChange={(e) => handleChange(e, setForm)} placeholder="End Time" />
 		</div>
 
 		<div className="grid grid-cols-2 gap-4 mb-2">
-			<div className="mb-2">
-				<label htmlFor="SearchAttributes">Search Attributes</label>
-				<input type="text" name="SearchAttributes" id="SearchAttributes" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.SearchAttributes} placeholder="Search Attributes" />
-			</div>
+			<Input name="SearchAttributes" value={form.SearchAttributes} onChange={(e) => handleChange(e, setForm)} placeholder="Search Attributes" />
 
-			<div className="mb-2">
-				<label htmlFor="ClearAttributes">Set/Clear Attributes</label>
-				<input type="text" name="ClearAttributes" id="ClearAttributes" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.ClearAttributes} placeholder="Clear Attributes" />
-			</div>
+			<Input name="ClearAttributes" value={form.ClearAttributes} onChange={(e) => handleChange(e, setForm)} placeholder="Set/Clear Attributes" />
 		</div>
 
 		<div className="mb-2">
