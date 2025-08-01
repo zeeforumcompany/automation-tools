@@ -64,6 +64,25 @@ export default function AmazonConnectContact() {
 		{"value": "us-gov-west-1", "label": "AWS GovCloud (US-West)"},
 	];
 
+	const timeRangeType = [
+		"INITIATION_TIMESTAMP",
+		"SCHEDULED_TIMESTAMP",
+		"CONNECTED_TO_AGENT_TIMESTAMP",
+		"DISCONNECT_TIMESTAMP",
+	];
+
+	const channels = [
+		"VOICE",
+		"CHAT",
+		"TASK",
+		"EMAIL",
+	];
+
+	const matchTypes = [
+		"MATCH_ALL",
+		"MATCH_ANY",
+	];
+
 	const getContactAttributes = async (client, contactId) => {
 		const input = {
 			InstanceId: form.InstanceId,
@@ -285,12 +304,20 @@ export default function AmazonConnectContact() {
 		<div className="grid grid-cols-3 gap-4 mb-2">
 			<div className="mb-2">
 				<label htmlFor="Channels">Channels</label>
-				<input type="text" name="Channels" id="Channels" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.Channels} placeholder="Channels" />
+				<select name="Channels" id="Channels" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.Channels}>
+					{channels.map(channel => (
+						<option key={channel} value={channel}>{channel}</option>
+					))}
+				</select>
 			</div>
 
 			<div className="mb-2">
 				<label htmlFor="SearchContactAttributeCriteriaMatchType">Search Contact Match Type</label>
-				<input type="text" name="SearchContactAttributeCriteriaMatchType" id="SearchContactAttributeCriteriaMatchType" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.SearchContactAttributeCriteriaMatchType} placeholder="Search Contact Match Type" />
+				<select name="SearchContactAttributeCriteriaMatchType" id="SearchContactAttributeCriteriaMatchType" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.SearchContactAttributeCriteriaMatchType}>
+					{matchTypes.map(type => (
+						<option key={type} value={type}>{type}</option>
+					))}
+				</select>
 			</div>
 
 			<div className="mb-2 ml-2">
@@ -302,7 +329,11 @@ export default function AmazonConnectContact() {
 		<div className="grid grid-cols-3 gap-4 mb-2">
 			<div className="mb-2">
 				<label htmlFor="TimeRangeType">Time Range Type</label>
-				<input type="text" name="TimeRangeType" id="TimeRangeType" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.TimeRangeType} placeholder="Time Range Type" />
+				<select name="TimeRangeType" id="TimeRangeType" className="border border-gray-300 rounded-md p-2 w-full" onChange={(e) => handleChange(e, setForm)} value={form.TimeRangeType}>
+					{timeRangeType.map(type => (
+						<option key={type} value={type}>{type}</option>
+					))}
+				</select>
 			</div>
 
 			<div className="mb-2">
