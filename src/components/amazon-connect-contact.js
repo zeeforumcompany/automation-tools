@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { ConnectClient, GetContactAttributesCommand, SearchContactsCommand, UpdateContactAttributesCommand } from "@aws-sdk/client-connect";
 import moment from "moment";
-import { handleChange, copyToClipboard, handleCheckbox, isDefined, delay, printFailedAndSuccessResponseData, printFailedAndSuccessResponseCount } from "@/helpers/functions";
+import { handleChange, isDefined, delay, printFailedAndSuccessResponseData, printFailedAndSuccessResponseCount } from "@/helpers/functions";
 import { useRef, useState } from "react";
+import DataHandler from "./shared/data-handler";
 
 export default function AmazonConnectContact() {
 	const htmlRef = useRef(null);
+	const childRef = useRef(null);
 	const [disabled, setDisabled] = useState(false);
-	const [form, setForm] = useState({
+	const defaultForm = {
 		InstanceId: '',
 		ContactId: '',
 		AccessKey: '',
@@ -24,7 +26,10 @@ export default function AmazonConnectContact() {
 		delay: 5,	// in seconds
 		TimeRangeType: "INITIATION_TIMESTAMP",
 		SearchContactAttributeCriteriaMatchType: "MATCH_ALL"
-	});
+	};
+
+	const [form, setForm] = useState(defaultForm);
+	const STORAGE_KEY = 'amazon-connect-contact';
 
 	const awsStates = [
 		{"value": "us-east-1", "label": "US East (N. Virginia)"},
@@ -118,6 +123,9 @@ export default function AmazonConnectContact() {
 	const searchContacts = async (e, nextToken = '') => {
 		try {
 			setDisabled(true);
+			if (childRef) {
+				childRef.current.saveData();
+			}
 
 			let counter = {
 				failed: 0,
@@ -359,7 +367,10 @@ export default function AmazonConnectContact() {
 			</div>
 		</div>
 
-        <button onClick={searchContacts} className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-sm hover:bg-blue-600 mt-2 disabled:bg-blue-400 disabled:cursor-not-allowed font-bold" disabled={disabled}>Search Contacts</button>
+		<div className="mb-2">
+			<button onClick={searchContacts} className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-sm hover:bg-blue-600 mt-2 disabled:bg-blue-400 disabled:cursor-not-allowed font-bold" disabled={disabled}>Search Contacts</button>
+			<DataHandler StorageKey={STORAGE_KEY} DefaultData={defaultForm} form={form} setForm={setForm} ref={childRef} />
+		</div>
 
         <hr className="my-4" />
         <div className="mb-2" ref={htmlRef}></div>

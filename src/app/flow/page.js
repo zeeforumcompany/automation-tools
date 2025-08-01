@@ -14,8 +14,6 @@ export default function App() {
 	const [initialEdges, setInitialEdges] = useState([]);
 	const [initialNodes, setInitialNodes] = useState([]);
 
-	console.log(form);
-
 	const setupFlow = () => {
 		try {
 			const nodes = [];
@@ -44,7 +42,6 @@ export default function App() {
 			nodes.sort((a, b) => {
 				return a.dependencyOrder - b.dependencyOrder;
 			});
-			console.log(nodes);
 
 			const edges = [];
 			Object.keys(branches).forEach((key) => {
@@ -66,7 +63,7 @@ export default function App() {
 			setInitialNodes(nodes);
 			setInitialEdges(edges);
 		} catch (error) {
-			console.error("Error setting up flow:", error);
+			console.log("Error setting up flow:", error);
 		}
 	}
 
