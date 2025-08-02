@@ -12,10 +12,12 @@
     "@aws-sdk/client-connect": "^3.857.0",
     "@xyflow/react": "^12.8.2",
     "axios": "^1.10.0",
+    "file-saver": "^2.0.5",
     "moment": "^2.30.1",
     "next": "15.4.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
