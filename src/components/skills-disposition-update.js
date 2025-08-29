@@ -9,7 +9,7 @@ export default function SkillsDispositionUpdate() {
 	const sendRequestRef = useRef(null);
 	const [disabled, setDisabled] = useState(false);
 	const [form, setForm] = useState({
-		curl: `curl --location --request GET 'https://BASE_URL/incontactapi/services/v28.0/skills/{{skillId}}' \
+		curl: `curl --location --request GET 'https://BASE_URL/incontactapi/services/v28.0/skills/{{skillId}}' \\
 --header 'Authorization: Bearer REPLACE_WITH_TOKEN'`,
 		skills: `[
 	{

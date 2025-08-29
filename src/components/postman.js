@@ -8,8 +8,8 @@ import { useRef, useState } from "react";
 export default function Postman() {
   const [disabled, setDisabled] = useState(false);
   const [form, setForm] = useState({
-    curl: `curl --location --request POST 'https://jsonplaceholder.typicode.com/posts?name={{name}}&query={{query}}' \
---header 'Content-Type: application/json' \
+    curl: `curl --location --request POST 'https://jsonplaceholder.typicode.com/posts?name={{name}}&query={{query}}' \\
+--header 'Content-Type: application/json' \\
 --data '{
     "title": "{{name}}",
     "body": "{{query}}",
